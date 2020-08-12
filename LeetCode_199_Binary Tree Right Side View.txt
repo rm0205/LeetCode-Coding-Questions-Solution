@@ -1,0 +1,35 @@
+class Solution {
+    public List<Integer> rightSideView(TreeNode root) {
+       
+     Queue<TreeNode> q=new LinkedList<>();
+     q.offer(root);
+    ArrayList<Integer> li=new ArrayList<>();
+         if(root==null)
+            return li;
+        
+    while(!q.isEmpty())
+    {
+        int count=q.size();
+        while(count>1)
+        {
+            TreeNode temp=q.poll();
+            if(temp.left!=null)
+                q.offer(temp.left);
+            if(temp.right!=null)
+                q.offer(temp.right);
+            count--;
+        }
+        if(count==1)
+        {
+             TreeNode temp1=q.poll();
+             li.add(temp1.val);
+               if(temp1.left!=null)
+                q.offer(temp1.left);
+            if(temp1.right!=null)
+                q.offer(temp1.right);
+        }
+        
+    }
+        return li;
+    }
+}
