@@ -1,0 +1,20 @@
+ public int eraseOverlapIntervals(Interval[] intervals) {
+        if (intervals == null || intervals.length == 0)     return 0;
+        Arrays.sort(intervals, new Comparator<Interval>() {
+            public int compare(Interval a, Interval b) {
+                return a.end - b.end;
+            } 
+        });
+        
+        int count = 0;
+        Interval pre = intervals[0];
+        for (int i = 1; i < intervals.length; ++i) {
+            //when we encounter an interval overlap with previous one, we remove it
+            if (intervals[i].start < pre.end) {
+                count++;
+            } else {
+                pre = intervals[i];
+            }
+        }
+        return count;
+    }
